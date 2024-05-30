@@ -1,0 +1,91 @@
+local LocalPlayer = game:GetService("Players").LocalPlayer.Character
+local Backpack = game:GetService("Players").LocalPlayer.Backpack
+local cframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+local rootpart = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+local inventory = require(game:GetService("ReplicatedStorage").Library.Client.Save).Get()["Inventory"]
+local currency = inventory.Currency
+
+getgenv().Fishing = true
+
+while getgenv().Fishing do
+    task.wait()
+
+    for i, v in pairs(currency) do
+        if v.id == "Fishing" then
+            -- Removed print statement
+            if v._am >= 100 and v._am <= 1000 then
+                local args = {
+                    [1] = "Sturdy Fishing Rod"
+                }
+                game:GetService("ReplicatedStorage").Network.FishingMerchant_PurchaseRod:InvokeServer(unpack(args))
+            elseif v._am >= 2499 and v._am <= 3000 then
+                local args = {
+                    [1] = "Advanced Fishing Rod"
+                }
+                game:GetService("ReplicatedStorage").Network.FishingMerchant_PurchaseRod:InvokeServer(unpack(args))
+            elseif v._am >= 24999 and v._am <= 99999 then
+                local args = {
+                    [1] = "Stone Fishing Rod"
+                }
+                game:GetService("ReplicatedStorage").Network.FishingMerchant_PurchaseRod:InvokeServer(unpack(args))
+            elseif v._am >= 99999 and v._am <= 200000 then
+                local args = {
+                    [1] = "Iron Fishing Rod"
+                }
+                game:GetService("ReplicatedStorage").Network.FishingMerchant_PurchaseRod:InvokeServer(unpack(args))
+            end 
+
+            -- Check if the rod is in the LocalPlayer
+            if LocalPlayer:FindFirstChild("Rod") then
+                task.wait(2)
+                rootpart.CFrame = workspace.__THINGS.__INSTANCE_CONTAINER.Active.Fishing.Map:GetChildren()[43].CFrame
+                local args = {
+                    [1] = Ray.new(Vector3.new(1120.80029296875, 87.40489196777344, -3448.416748046875), Vector3.new(0.6880636215209961, -0.5191763639450073, 0.5069756507873535)),
+                    [2] = Vector3.new(1129.03662109375, 82.31732177734375, -3442.386962890625)
+                }
+                
+                game:GetService("ReplicatedStorage").Network.Click:FireServer(unpack(args))
+                local args = {
+                    [1] = "Fishing",
+                    [2] = "RequestReel"
+                }
+                
+                game:GetService("ReplicatedStorage").Network.Instancing_FireCustomFromClient:FireServer(unpack(args))
+                
+                 local args = {
+                    [1] = "Fishing",
+                    [2] = "RequestCast",
+                    [3] = Vector3.new(1144.8623046875, 75.91413116455078, -3459.06005859375)
+                }
+                game:GetService("ReplicatedStorage").Network.Instancing_FireCustomFromClient:FireServer(unpack(args))
+
+
+            -- Check if the rod is in the Backpack but not in LocalPlayer
+            elseif Backpack:FindFirstChild("Rod") then
+                rootpart.CFrame = workspace.__THINGS.Instances.Fishing.Teleports.Enter.CFrame
+                task.wait(2)
+                rootpart.CFrame = workspace.__THINGS.__INSTANCE_CONTAINER.Active.Fishing.Map:GetChildren()[43].CFrame
+                local args = {
+                    [1] = Ray.new(Vector3.new(1120.80029296875, 87.40489196777344, -3448.416748046875), Vector3.new(0.6880636215209961, -0.5191763639450073, 0.5069756507873535)),
+                    [2] = Vector3.new(1129.03662109375, 82.31732177734375, -3442.386962890625)
+                }
+                
+                game:GetService("ReplicatedStorage").Network.Click:FireServer(unpack(args))
+                local args = {
+                    [1] = "Fishing",
+                    [2] = "RequestReel"
+                }
+                
+                game:GetService("ReplicatedStorage").Network.Instancing_FireCustomFromClient:FireServer(unpack(args))
+                
+                    local args = {
+                    [1] = "Fishing",
+                    [2] = "RequestCast",
+                    [3] = Vector3.new(1144.8623046875, 75.91413116455078, -3459.06005859375)
+                }
+                game:GetService("ReplicatedStorage").Network.Instancing_FireCustomFromClient:FireServer(unpack(args))
+            end 
+        end 
+    end 
+end 

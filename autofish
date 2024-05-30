@@ -1,3 +1,4 @@
+print('1)
 local LocalPlayer = game:GetService("Players").LocalPlayer.Character
 local Backpack = game:GetService("Players").LocalPlayer.Backpack
 local cframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
@@ -35,7 +36,7 @@ while getgenv().Fishing do
                 }
                 game:GetService("ReplicatedStorage").Network.FishingMerchant_PurchaseRod:InvokeServer(unpack(args))
             end 
-
+print('hi')
             -- Check if the rod is in the LocalPlayer
             if LocalPlayer:FindFirstChild("Rod") then
                 task.wait(2)
@@ -60,7 +61,7 @@ while getgenv().Fishing do
                 }
                 game:GetService("ReplicatedStorage").Network.Instancing_FireCustomFromClient:FireServer(unpack(args))
 
-
+print('wtf?')
             -- Check if the rod is in the Backpack but not in LocalPlayer
             elseif Backpack:FindFirstChild("Rod") then
                 rootpart.CFrame = workspace.__THINGS.Instances.Fishing.Teleports.Enter.CFrame
@@ -85,6 +86,7 @@ while getgenv().Fishing do
                     [3] = Vector3.new(1144.8623046875, 75.91413116455078, -3459.06005859375)
                 }
                 game:GetService("ReplicatedStorage").Network.Instancing_FireCustomFromClient:FireServer(unpack(args))
+print('done')
             end 
         end 
     end 
